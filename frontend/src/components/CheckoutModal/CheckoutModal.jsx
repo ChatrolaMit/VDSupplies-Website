@@ -40,6 +40,18 @@ const CheckoutForm = ({ clientSecret, amount, onSuccess, token, orderId, user })
       setError(stripeError.message);
       setLoading(false);
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+      try {
+        await fetch('/api/checkout/confirm', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ paymentIntentId: paymentIntent.id })
+        });
+      } catch (confirmErr) {
+        console.warn('Failed to call /api/checkout/confirm:', confirmErr);
+      }
       onSuccess(orderId);
     }
   };

@@ -391,6 +391,110 @@ app.post('/api/checkout/intent', authMiddleware, async (req, res) => {
   }
 });
 
+app.post('/api/checkout/confirm', authMiddleware, async (req, res) => {
+  try {
+    const { paymentIntentId } = req.body;
+    if (!paymentIntentId) {
+      return res.status(400).json({ error: 'Missing paymentIntentId' });
+    }
+
+    // Check if order already created (e.g. by webhook)
+    const existingOrder = await Order.findOne({ stripeSessionId: paymentIntentId });
+    if (existingOrder) {
+      return res.json({ success: true, order: existingOrder });
+    }
+
+    // Verify payment intent directly with Stripe
+    const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    if (!paymentIntent || paymentIntent.status !== 'succeeded') {
+      return res.status(400).json({ error: 'Payment has not succeeded yet' });
+    }
+
+    const { cartItems, productId, quantity, orderId } = paymentIntent.metadata || {};
+    let items = [];
+    if (cartItems) {
+      items = JSON.parse(cartItems);
+    } else if (productId) {
+      items = [{ productId, quantity: parseInt(quantity, 10) }];
+    }
+
+    const user = await User.findById(req.userId);
+    let customerEmail = paymentIntent.receipt_email || user?.email || 'no-email-provided@stripe.com';
+    let customerName = user?.name || paymentIntent.shipping?.name || 'Customer';
+
+    const newOrder = new Order({
+      userId: req.userId,
+      orderId: orderId || `ORD-${Date.now()}`,
+      stripeSessionId: paymentIntent.id,
+      customerEmail,
+      customerName,
+      items: items,
+      totalAmount: paymentIntent.amount,
+      currency: paymentIntent.currency || 'aud',
+      paymentStatus: 'paid',
+      shippingAddress: paymentIntent.shipping?.address || null
+    });
+
+    await newOrder.save();
+    console.log('Order confirmed directly from client for:', paymentIntent.id);
+
+    // Send confirmation emails in background
+    (async () => {
+      try {
+        const formatAmount = (amount) => `$${(amount / 100).toFixed(2)}`;
+        let orderItemsHTML = '<ul>';
+        for (let item of items) {
+          const prod = await Product.findOne({ id: item.productId });
+          const pName = prod ? prod.name : `Product ID: ${item.productId}`;
+          orderItemsHTML += `<li>${item.quantity}x ${pName}</li>`;
+        }
+        orderItemsHTML += '</ul>';
+
+        const customerMailOptions = {
+          from: `"Victoria Diagnostic Supplies" <${process.env.SMTP_USER}>`,
+          to: customerEmail,
+          subject: `Order Confirmation - ${newOrder.orderId}`,
+          html: `
+            <h2>Thank you for your order!</h2>
+            <p>Hi ${customerName},</p>
+            <p>We've received your order <strong>${newOrder.orderId}</strong> and are preparing it now.</p>
+            <p><strong>Total Amount:</strong> ${formatAmount(paymentIntent.amount)}</p>
+            <p>Thanks for shopping with us!</p>
+          `,
+        };
+
+        const adminMailOptions = {
+          from: `"Victoria Diagnostic Supplies System" <${process.env.SMTP_USER}>`,
+          to: process.env.ADMIN_EMAIL,
+          subject: `New Order Received - ${newOrder.orderId}`,
+          html: `
+            <h2>New Order Alert</h2>
+            <p>A new order has been placed on the store.</p>
+            <ul>
+              <li><strong>Order ID:</strong> ${newOrder.orderId}</li>
+              <li><strong>Customer Name:</strong> ${customerName}</li>
+              <li><strong>Customer Email:</strong> ${customerEmail}</li>
+              <li><strong>Total Amount:</strong> ${formatAmount(paymentIntent.amount)}</li>
+            </ul>
+            <h3>Order Items:</h3>
+            ${orderItemsHTML}
+          `,
+        };
+
+        await transporter.sendMail(customerMailOptions);
+        await transporter.sendMail(adminMailOptions);
+      } catch (err) {
+        console.error('Email error in confirm order:', err.message);
+      }
+    })();
+
+    res.json({ success: true, order: newOrder });
+  } catch (err) {
+    console.error('Confirm order error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get('/api/orders', authMiddleware, async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.userId }).sort({ createdAt: -1 });
