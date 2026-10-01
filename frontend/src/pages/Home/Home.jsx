@@ -1,0 +1,415 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  ArrowRight,
+  ChevronRight,
+  Eye,
+  FileCheck,
+  QrCode,
+  Warehouse,
+  Clock,
+  Truck,
+  HelpCircle,
+  Cpu,
+  Layers,
+  Users,
+  Compass,
+  Heart,
+  Handshake,
+  Brain,
+  Activity,
+  Globe,
+  ShieldCheck,
+  Sparkles,
+  TrendingDown,
+} from 'lucide-react';
+import Button from '../../components/Button/Button';
+import CategoryCard from '../../components/CategoryCard/CategoryCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import categories from '../../data/categories';
+import { fetchFeaturedProducts } from '../../data/products';
+import './Home.css';
+import disinfectorImg from '../../assets/disinfector.png';
+
+export default function Home() {
+  const [featured, setFeatured] = useState([]);
+  const [postcode, setPostcode] = useState('');
+  const [etaResult, setEtaResult] = useState(null);
+  const [etaError, setEtaError] = useState(null);
+
+  useEffect(() => {
+    fetchFeaturedProducts().then(setFeatured).catch(console.error);
+  }, []);
+
+
+
+  useEffect(() => {
+    document.title = "VD Supplies | Medical Consumables & Radiology Equipment, Australia";
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) {
+      meta.setAttribute(
+        'content',
+        'Medical consumables and radiology equipment supplied to Australian clinics, hospitals and imaging departments — with manufacturer relationships behind the range for anything more specific.'
+      );
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const elements = entry.target.querySelectorAll('.reveal-on-scroll');
+          elements.forEach((el) => el.classList.add('revealed'));
+        } else {
+          // Reset when timeline moves completely out of viewport
+          const elements = entry.target.querySelectorAll('.reveal-on-scroll');
+          elements.forEach((el) => el.classList.remove('revealed'));
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.05,
+      rootMargin: "0px 0px -60px 0px"
+    });
+
+    const container = document.querySelector('.timeline-container');
+    if (container) {
+      observer.observe(container);
+    }
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, []);
+
+  // Postcode ETA handler
+  const handleCheckETA = () => {
+    setEtaError(null);
+    setEtaResult(null);
+    const cleanPostcode = postcode.trim();
+    if (!/^\d{4}$/.test(cleanPostcode)) {
+      setEtaError('Enter a 4-digit Australian postcode.');
+      return;
+    }
+    const firstChar = cleanPostcode[0];
+    const metro = ['2', '3', '4', '5', '6'].includes(firstChar);
+    const deliveryWindow = metro
+      ? 'Next business day – 48 hours'
+      : '2–4 business days (guaranteed window shown at inquiry)';
+    
+    setEtaResult({
+      postcode: cleanPostcode,
+      window: deliveryWindow,
+    });
+  };
+
+
+
+  return (
+    <>
+      <main className="home">
+
+
+        {/* ── Hero Section ── */}
+        <header className="home__hero">
+          <div className="container home__hero-inner">
+            <div className="home__hero-content">
+
+              <h1 className="home__hero-title">
+                Your Direct Partner in Medical Supplies
+              </h1>
+              <p className="home__hero-subtitle">
+                Certified medical consumables and equipment, ready for same-day dispatch from Australian warehouses. Whether you need standard products, custom solutions, or hard-to-source items, we build supply chains that work around your business—not the other way around.
+
+              </p>
+              <div className="home__hero-actions">
+                <Button as={Link} to="/products" variant="primary" size="lg" iconRight={ArrowRight}>
+                  Browse the range
+                </Button>
+                <Button as={Link} to="/about" variant="secondary" size="lg">
+                  Why we are different
+                </Button>
+              </div>
+
+              <div className="home__hero-stats">
+                <div><strong>48 hr</strong> Metro ETA Guarantee</div>
+                {/* <div><strong>100%</strong> TGA Validation</div> */}
+                <div><strong>Direct</strong> Manufacturer Connection</div>
+              </div>
+            </div>
+
+            {/* Premium 3D Disinfector Render Display */}
+            <div className="home__hero-media">
+              <div className="hero-disinfector-float">
+                <div className="hero-disinfector-card">
+                  <div className="hero-disinfector-glow"></div>
+                  
+                  {/* Tech Bracket/Corners HUD Overlay */}
+                  <div className="hero-disinfector-hud">
+                    <div className="hud-corner top-left"></div>
+                    <div className="hud-corner top-right"></div>
+                    <div className="hud-corner bottom-left"></div>
+                    <div className="hud-corner bottom-right"></div>
+                  </div>
+
+                  <div className="hero-disinfector-chamber">
+                    {/* Technical Crosshair Reticle Overlay */}
+                    <div className="hero-hud-crosshair"></div>
+
+                    {/* Glowing Laser Scan Line */}
+                    <div className="hero-laser-line"></div>
+                    
+                    {/* Floating Aerosol Mist Particles */}
+                    <div className="hero-mist-particles">
+                      <span className="hp1"></span>
+                      <span className="hp2"></span>
+                      <span className="hp3"></span>
+                      <span className="hp4"></span>
+                      <span className="hp5"></span>
+                    </div>
+
+                    {/* Sweeping Glass Reflection Shine */}
+                    <div className="hero-disinfector-shine"></div>
+
+                    <img 
+                      src={disinfectorImg} 
+                      alt="3D Render of Aerosol High-Level Disinfector Decontamination Chamber" 
+                      className="hero-disinfector-image"
+                    />
+                  </div>
+
+                  <div className="hero-disinfector-badge">
+                    <span className="live-dot font-blink"></span>
+                    ACTIVE CYCLES
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+
+
+        {/* ── Brand Pillars Section (Timeline Layout) ── */}
+        <section className="home__section pillars-section">
+          <div className="container">
+            <div className="home__section-header text-center">
+              <span className="section-badge">Real Core Values</span>
+              <h2 className="home__section-title">Brand pillars</h2>
+              <p className="home__section-subtitle">
+                How we operate differently from traditional sales organizations and static catalogue brokers.
+              </p>
+            </div>
+
+            <div className="timeline-container">
+              {/* Central vertical line */}
+              <div className="timeline-line"></div>
+
+              {/* Pillar 1 */}
+              <div className="timeline-item left reveal-on-scroll delay-1">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Warehouse size={24} />
+                    </div>
+                  </div>
+                  <h3>We're a supplier first</h3>
+                  <p>
+                    Real stock, real products, real delivery — that's JUST the foundation, not a side effect of a sourcing service.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 2 */}
+              <div className="timeline-item right reveal-on-scroll delay-2">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Cpu size={24} />
+                    </div>
+                  </div>
+                  <h3>Solve, don't just sell</h3>
+                  <p>
+                    A request that doesn't match an existing product is a starting point, not a dead end.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="timeline-item left reveal-on-scroll delay-3">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Layers size={24} />
+                    </div>
+                  </div>
+                  <h3>Fewer layers, real value</h3>
+                  <p>
+                    Where we can connect a facility more directly to a manufacturer, we do — because every unnecessary layer is cost and delay someone else is paying for.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 4 */}
+              <div className="timeline-item right reveal-on-scroll delay-4">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Brain size={24} />
+                    </div>
+                  </div>
+                  <h3>Category intelligence</h3>
+                  <p>
+                    We understand the products and the clinical context well enough to have a real conversation, not just take an order.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 5 */}
+              <div className="timeline-item left reveal-on-scroll delay-5">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Heart size={24} />
+                    </div>
+                  </div>
+                  <h3>Built for the long term</h3>
+                  <p>
+                    A relationship gets more valuable over time as we learn a facility's needs — that's the model, not a one-off transaction.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Why Facilities Switch ── */}
+        <section id="customer-value" className="home__section switching-section">
+          <div className="container">
+            <div className="home__section-header text-center">
+              <span className="section-badge">Customer Value</span>
+              <h2 className="home__section-title">Why facilities are switching</h2>
+              <p className="home__section-subtitle">
+                Clinical managers deserve straightforward logistics without hidden distributor brokerage fees.
+              </p>
+            </div>
+
+            <div className="process-flow-container">
+              {/* Horizontal connecting line behind cards */}
+              <div className="process-flow-line"></div>
+
+              <div className="process-flow-grid">
+                {/* Step 1 */}
+                <div className="process-flow-card">
+                  <div className="process-step-badge step-1">
+                    <span>01</span>
+                  </div>
+                  <h4>We're a real supplier, not a broker</h4>
+                  <p>Stock, product knowledge and delivery come first.</p>
+                </div>
+
+                {/* Step 2 */}
+                <div className="process-flow-card">
+                  <div className="process-step-badge step-2">
+                    <span>02</span>
+                  </div>
+                  <h4>We rarely say "we don't have that"</h4>
+                  <p>Manufacturer relationships mean there's usually a path, even for an unusual request.</p>
+                </div>
+
+                {/* Step 3 */}
+                <div className="process-flow-card">
+                  <div className="process-step-badge step-3">
+                    <span>03</span>
+                  </div>
+                  <h4>You get access, not just inventory</h4>
+                  <p>A fixed catalogue can't flex to your actual need. Our network can.</p>
+                </div>
+
+                {/* Step 4 */}
+                <div className="process-flow-card">
+                  <div className="process-step-badge step-4">
+                    <span>04</span>
+                  </div>
+                  <h4>You get a straight answer on cost</h4>
+                  <p>We explain where savings come from — a removed layer, not just a lower quote.</p>
+                </div>
+
+                {/* Step 5 */}
+                <div className="process-flow-card">
+                  <div className="process-step-badge step-5">
+                    <span>05</span>
+                  </div>
+                  <h4>You get a partner who asks first</h4>
+                  <p>"What do you need?" comes before "here's what we've got."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Product Categories Section ── */}
+        {/*
+        <section className="home__section categories-section">
+          <div className="container">
+            <div className="home__section-header">
+              <div>
+                <span className="section-badge">Departments We Equip</span>
+                <h2 className="home__section-title">Browse standard categories</h2>
+                <p className="home__section-subtitle">
+                  Clinical equipment and consumables held in Melbourne and Sydney warehouses.
+                </p>
+              </div>
+              <Button as={Link} to="/categories" variant="ghost" size="sm" iconRight={ChevronRight}>
+                All Categories
+              </Button>
+            </div>
+
+            <div className="home__categories-grid">
+              {categories.slice(0, 4).map((cat) => (
+                <CategoryCard key={cat.id} category={cat} />
+              ))}
+            </div>
+          </div>
+        </section>
+        */}
+
+        {/* ── Featured Solutions & Services ── */}
+        {featured.length > 0 && (
+          <section className="home__section featured-section">
+            <div className="container">
+              <div className="home__section-header">
+                <div>
+                  <span className="section-badge">Solutions</span>
+                  <h2 className="home__section-title">Featured Solution &amp; Service</h2>
+                  <p className="home__section-subtitle">
+                    Tailored medical supply solutions and services engineered for modern clinical environments.
+                  </p>
+                </div>
+                <Button as={Link} to="/products" variant="ghost" size="sm" iconRight={ChevronRight}>
+                  Full Catalog
+                </Button>
+              </div>
+              <div className="home__products-grid">
+                {featured.slice(0, 4).map((product) => (
+                  <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    showPrice={false} 
+                    showBadge={false} 
+                    showStock={false} 
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+    </>
+  );
+}

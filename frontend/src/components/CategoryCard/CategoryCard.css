@@ -1,0 +1,151 @@
+.category-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xl);
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 28px; /* Matching the rounded cards in the reference screenshot */
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease,
+              background-color 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(14, 165, 233, 0.35); /* Glowing cyan themed border */
+  background: rgba(255, 255, 255, 0.025);
+  box-shadow: 0 15px 35px rgba(14, 165, 233, 0.08), inset 0 0 10px rgba(14, 165, 233, 0.03);
+}
+
+/* Icon layout at top-left matching the screenshot */
+.category-card__icon-container {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--space-lg);
+}
+
+.category-card__icon-main-box {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 165, 233, 0.06);
+  border: 1px solid rgba(14, 165, 233, 0.15);
+  color: var(--cyan);
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+}
+
+.category-card:hover .category-card__icon-main-box {
+  background-color: var(--cyan);
+  color: #030712; /* Solid dark text icon */
+  border-color: transparent;
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+}
+
+.category-card__icon-main {
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-card__icon-main {
+  transform: scale(1.05);
+}
+
+/* Overlapping smaller sub-icon bubble (from screenshot) */
+.category-card__icon-sub-box {
+  position: absolute;
+  top: -4px;
+  right: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #030712; /* Dark opaque background mask */
+  border: 2px solid rgba(14, 165, 233, 0.45);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  z-index: 2;
+}
+
+.category-card:hover .category-card__icon-sub-box {
+  transform: scale(1.1);
+  border-color: #ffffff;
+}
+
+.category-card__icon-sub {
+  font-weight: 800;
+}
+
+.category-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.category-card__title {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+.category-card:hover .category-card__title {
+  color: var(--cyan); /* Cyan title highlighting on card hover */
+}
+
+.category-card__desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  padding-right: var(--space-lg); /* Prevent text overlap with bottom-right arrow */
+}
+
+/* Small horizontal indicator accent line at the bottom left (from screenshot) */
+.category-card__indicator-bar {
+  width: 24px;
+  height: 3px;
+  background: var(--cyan);
+  border-radius: var(--radius-full);
+  margin-top: var(--space-lg);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-card:hover .category-card__indicator-bar {
+  transform: scaleX(1);
+}
+
+/* Floating bottom-right corner arrow */
+.category-card__arrow-wrapper {
+  position: absolute;
+  bottom: var(--space-xl);
+  right: var(--space-xl);
+  color: var(--ink-soft);
+  opacity: 0.5;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease, opacity 0.4s ease;
+}
+
+.category-card:hover .category-card__arrow-wrapper {
+  transform: translateX(4px) scale(1.1);
+  color: var(--cyan);
+  opacity: 1;
+}

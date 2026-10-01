@@ -1,0 +1,78 @@
+const categories = [
+  {
+    id: 'contrast-injector',
+    code: 'CAT-01',
+    name: 'Contrast & Injector Consumables',
+    description: 'OEM-compatible syringes, tubing and spikes for major injector brands.',
+    longDescription: 'High-quality sterile consumables designed for CT, MRI, and Angiography injectors.',
+    icon: 'Activity',
+    productCount: 12,
+  },
+  {
+    id: 'radiation-protection',
+    code: 'CAT-02',
+    name: 'Radiation Protection',
+    description: 'Lead aprons, thyroid and gonad shields, storage racks, integrity testing.',
+    longDescription: 'Premium radiation shielding solutions compliant with international safety benchmarks.',
+    icon: 'ShieldAlert',
+    productCount: 8,
+  },
+  {
+    id: 'positioning-immobilisation',
+    code: 'CAT-03',
+    name: 'Positioning & Immobilisation',
+    description: 'Sponges, sandbags, straps and paediatric immobilisation aids.',
+    longDescription: 'High-density foam positioning aids and safety restraints for motion-free scanning.',
+    icon: 'Move',
+    productCount: 15,
+  },
+  {
+    id: 'ultrasound-consumables',
+    code: 'CAT-04',
+    name: 'Ultrasound Consumables',
+    description: 'Gels, sterile probe covers, transducer wipes and warmers.',
+    longDescription: 'Clinical gels, transmission media, and acoustic barrier products.',
+    icon: 'Radio',
+    productCount: 9,
+  },
+  {
+    id: 'markers-accessories',
+    code: 'CAT-05',
+    name: 'Markers & X-ray Accessories',
+    description: 'Skin markers, anatomical side markers, detector and equipment covers.',
+    longDescription: 'Surgical skin markers and reference grids for precision radiological imaging.',
+    icon: 'Tags',
+    productCount: 14,
+  },
+  {
+    id: 'patient-care',
+    code: 'CAT-06',
+    name: 'Patient Care & Infection Control',
+    description: 'Drapes, kidney dishes, PPE and single-use hollowware.',
+    longDescription: 'Hygienic disposables, sterile drapes, and clinic-wide protective apparel.',
+    icon: 'Heart',
+    productCount: 22,
+  },
+  {
+    id: 'qa-test',
+    code: 'CAT-07',
+    name: 'QA & Test Tools',
+    description: 'Phantoms, grids, dosimetry accessories and calibration tools.',
+    longDescription: 'Quality assurance phantoms and metrics evaluation tools for radiology suites.',
+    icon: 'Cpu',
+    productCount: 6,
+  },
+  {
+    id: 'custom-packs',
+    code: 'CAT-08',
+    name: 'Custom Procedure Packs',
+    description: 'Your protocol, kitted and batch-traceable. Designed with your team.',
+    longDescription: 'Bespoke clinical procedure packs customized for efficiency and complete sterility.',
+    icon: 'Briefcase',
+    productCount: 5,
+  },
+];
+
+export default categories;
+
+export const getCategoryById = (id) => categories.find((c) => c.id === id);

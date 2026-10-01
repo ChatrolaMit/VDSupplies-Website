@@ -1,0 +1,18 @@
+.success-page {
+  background-color: var(--color-background);
+  min-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.success-page h1 {
+  font-family: var(--font-heading);
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.success-page p {
+  color: var(--color-text-light);
+  font-size: 1.125rem;
+}

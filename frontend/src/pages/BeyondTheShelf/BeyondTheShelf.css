@@ -1,0 +1,259 @@
+.bts {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+/* Hero */
+.bts__hero {
+  background: 
+    radial-gradient(800px 400px at 85% 10%, rgba(59, 130, 246, 0.16), transparent 75%),
+    radial-gradient(600px 300px at 15% 85%, rgba(143, 179, 223, 0.12), transparent 75%),
+    radial-gradient(circle at 50% 50%, #081a33 0%, #040d1a 100%);
+  padding: var(--space-4xl) 0 var(--space-3xl);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+
+.bts__hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 88px 88px;
+  pointer-events: none;
+}
+
+.bts__hero-content {
+  max-width: 780px;
+  position: relative;
+  z-index: 2;
+}
+
+.bts__badge {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+  border: 1px solid rgba(14, 77, 164, 0.2);
+  background: rgba(14, 77, 164, 0.05);
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+}
+
+.bts__title {
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 800;
+  line-height: 1.08;
+  color: var(--ink);
+  margin-bottom: var(--space-lg);
+}
+
+.bts__lead {
+  font-size: clamp(16px, 2.2vw, 20px);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.bts__lead strong {
+  color: var(--blue);
+}
+
+/* Philosophy */
+.bts__philosophy {
+  padding: var(--space-3xl) 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.bts__philosophy-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .bts__philosophy-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+.bts__philosophy-text h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: var(--space-base);
+  color: var(--ink);
+}
+
+.bts__philosophy-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+.bts__philosophy-quote {
+  background: var(--paper);
+  border-left: 4px solid var(--blue);
+  padding: var(--space-lg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  box-shadow: var(--shadow-1);
+}
+
+.clinical-quote {
+  font-family: var(--font-family-headings);
+  font-size: 18px;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--ink);
+}
+
+/* Capabilities Section */
+.bts__capabilities {
+  padding: var(--space-3xl) 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.bts__section-header {
+  max-width: 650px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.bts__section-header.text-center {
+  text-align: center;
+}
+
+.bts__section-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--ink);
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.bts__section-subtitle {
+  font-size: 16px;
+  color: var(--ink-soft);
+}
+
+.bts__capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+@media (max-width: 1024px) {
+  .bts__capabilities-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .bts__capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.capability-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-xl);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.capability-card:hover {
+  border-color: var(--blue);
+  box-shadow: var(--shadow-3);
+  transform: translateY(-4px);
+}
+
+.capability-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: rgba(23, 179, 191, 0.1);
+  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.capability-card:hover .capability-card__icon-wrap {
+  background: var(--blue);
+  color: #FFFFFF;
+}
+
+.capability-card__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--ink);
+}
+
+.capability-card__desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+/* CTA */
+.bts__cta {
+  padding: var(--space-4xl) 0;
+  background: var(--paper);
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+
+.bts__cta::before {
+  content: "OEM";
+  position: absolute;
+  right: -20px;
+  bottom: -40px;
+  font-family: var(--font-family-headings);
+  font-weight: 800;
+  font-size: 180px;
+  color: rgba(0, 0, 0, 0.015);
+  pointer-events: none;
+}
+
+.bts__cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.bts__cta-content h2 {
+  font-size: clamp(28px, 3.5vw, 38px);
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+  color: var(--ink);
+}
+
+.bts__cta-content p {
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-xl);
+  line-height: 1.6;
+}
+
+.bts__cta-buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
