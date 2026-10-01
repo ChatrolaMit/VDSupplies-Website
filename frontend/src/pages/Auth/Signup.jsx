@@ -13,7 +13,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useLocation(); 
 
   useEffect(() => {
     // Google OAuth strictly prohibits IP addresses like 127.0.0.1.

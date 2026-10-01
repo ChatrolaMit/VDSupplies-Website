@@ -4,7 +4,7 @@ import { GoogleLogin } from '@react-oauth/google';
 import { AuthContext } from '../../context/AuthContext';
 import Button from '../../components/Button/Button';
 import './Auth.css';
-
+ 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
