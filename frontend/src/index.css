@@ -139,21 +139,25 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
   font-family: var(--font-family);
   font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 17px;
+  line-height: 26px;
   color: var(--color-on-surface);
   background: radial-gradient(circle at 80% 20%, #0d2242 0%, #060f1e 60%, #030810 100%);
   background-attachment: fixed;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 img {
@@ -180,7 +184,7 @@ button {
 
 input, select, textarea {
   font-family: var(--font-family);
-  font-size: 16px;
+  font-size: 17px;
   border: none;
   outline: none;
   background: none;
@@ -188,53 +192,53 @@ input, select, textarea {
 
 /* ── Typography Classes ────────────────────────── */
 .text-h1 {
-  font: 700 40px/48px var(--font-family-headings);
+  font: 700 44px/52px var(--font-family-headings);
   letter-spacing: -0.02em;
   color: var(--color-on-surface);
 }
 
 .text-h2 {
-  font: 700 32px/40px var(--font-family-headings);
+  font: 700 34px/42px var(--font-family-headings);
   letter-spacing: -0.02em;
   color: var(--color-on-surface);
 }
 
 .text-h3 {
-  font: 600 24px/32px var(--font-family-headings);
+  font: 600 26px/34px var(--font-family-headings);
   letter-spacing: -0.01em;
   color: var(--color-on-surface);
 }
 
 .text-h4 {
-  font: 600 20px/28px var(--font-family-headings);
+  font: 600 22px/30px var(--font-family-headings);
   letter-spacing: -0.01em;
   color: var(--color-on-surface);
 }
 
 .text-body-lg {
-  font: 400 18px/28px var(--font-family);
+  font: 400 19px/30px var(--font-family);
   color: var(--color-on-surface);
 }
 
 .text-body-md {
-  font: 400 16px/24px var(--font-family);
+  font: 400 17px/26px var(--font-family);
   color: var(--color-on-surface);
 }
 
 .text-body-sm {
-  font: 400 14px/20px var(--font-family);
+  font: 400 15px/22px var(--font-family);
   color: var(--color-on-surface-variant);
 }
 
 .text-label-md {
-  font: 600 14px/16px var(--font-family);
+  font: 600 15px/18px var(--font-family);
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--color-on-surface-variant);
 }
 
 .text-label-sm {
-  font: 600 12px/14px var(--font-family);
+  font: 600 13px/16px var(--font-family);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-on-surface-variant);

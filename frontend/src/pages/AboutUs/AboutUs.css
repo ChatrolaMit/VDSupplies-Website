@@ -7,14 +7,14 @@
 .about-page__badge {
   display: inline-block;
   font-family: var(--font-family-mono);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--blue);
   margin-bottom: var(--space-md);
   border: 1px solid rgba(14, 77, 164, 0.2);
   background: rgba(14, 77, 164, 0.05);
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-full);
 }
 
@@ -78,16 +78,16 @@
 }
 
 .about-page__hero-subtitle {
-  font-size: 16.5px;
-  line-height: 1.65;
+  font-size: 18.5px;
+  line-height: 1.7;
   color: var(--ink);
   margin-bottom: var(--space-md);
   max-width: 860px;
 }
 
 .about-page__hero-secondary {
-  font-size: 14.5px;
-  line-height: 1.6;
+  font-size: 16.5px;
+  line-height: 1.65;
   color: var(--ink-soft);
   margin-bottom: var(--space-xl);
   max-width: 860px;
@@ -104,7 +104,7 @@
   display: flex;
   gap: var(--space-xl);
   flex-wrap: wrap;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--ink-soft);
   border-top: 1px solid var(--line);
   padding-top: var(--space-lg);
@@ -119,15 +119,15 @@
 .about-page__hero-stats div strong {
   display: block;
   font-family: var(--font-family-headings);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--ink);
   margin-bottom: 2px;
 }
 
 .about-page__hero-stats div span {
   display: block;
-  font-size: 12px;
-  line-height: 1.3;
+  font-size: 13.5px;
+  line-height: 1.35;
 }
 
 /* ── OEM Network Card Widget ── */
@@ -309,7 +309,7 @@
 .identity-card__badge {
   display: inline-block;
   font-family: var(--font-family-mono);
-  font-size: 11px;
+  font-size: 13px;
   color: var(--blue);
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -318,8 +318,8 @@
 }
 
 .identity-card__main-text {
-  font-size: 18px;
-  line-height: 1.65;
+  font-size: 20px;
+  line-height: 1.7;
   color: var(--ink);
   max-width: 900px;
   margin-bottom: var(--space-lg);
@@ -337,7 +337,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .identity-feature .dot {
@@ -417,14 +417,14 @@
 }
 
 .capability-card h3 {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 700;
   color: var(--ink);
 }
 
 .capability-card__text {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   color: var(--ink-soft);
 }
 
@@ -509,7 +509,7 @@
 }
 
 .facility-name {
-  font-size: 14.5px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--ink);
 }
@@ -576,8 +576,8 @@
 }
 
 .mv-item-card p {
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 16.5px;
+  line-height: 1.7;
   color: var(--ink-soft);
 }
 
@@ -631,3 +631,210 @@
   color: var(--ink-soft);
   max-width: 600px;
 }
+
+/* ── Brand Pillars Section (Timeline Layout) ── */
+.about-page__pillars-section {
+  padding: var(--space-4xl) 0;
+  background: linear-gradient(180deg, rgba(3, 7, 18, 0.95) 0%, #081225 50%, rgba(3, 7, 18, 0.95) 100%);
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page__pillars-section .section-badge {
+  background: rgba(14, 165, 233, 0.08);
+  color: var(--cyan);
+  border: 1px solid rgba(14, 165, 233, 0.2);
+  letter-spacing: 0.15em;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  display: inline-block;
+  margin-bottom: var(--space-sm);
+  font-family: var(--font-family-mono);
+}
+
+.about-page__section-subtitle {
+  color: var(--ink-soft);
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  font-size: 17.5px;
+}
+
+.about-page__section-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: var(--space-3xl) auto 0;
+  padding: var(--space-xl) 0;
+}
+
+/* Central vertical line */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #8fb3df 0%, #1d4ed8 100%);
+  transform: translateX(-50%);
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(143, 179, 223, 0.3);
+}
+
+/* Individual timeline item container */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 0 var(--space-2xl) var(--space-2xl);
+  box-sizing: border-box;
+}
+
+/* Positioning left items */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+/* Positioning right items */
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+/* Header row for circle icon */
+.timeline-header-row {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.timeline-item.left .timeline-header-row {
+  flex-direction: row-reverse;
+}
+
+/* Circular icon */
+.timeline-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.4);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.timeline-item:hover .timeline-icon-circle {
+  transform: scale(1.08);
+}
+
+/* Timeline center dot nodes */
+.timeline-dot {
+  position: absolute;
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  border: 3px solid #060f1e;
+  box-shadow: 0 0 8px #0ea5e9;
+  z-index: 10;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.timeline-item.left .timeline-dot {
+  right: -7px;
+}
+
+.timeline-item.right .timeline-dot {
+  left: -7px;
+}
+
+/* Content typography */
+.timeline-content-wrapper h3 {
+  font-size: clamp(20px, 2.2vw, 24px);
+  font-weight: 800;
+  margin-bottom: var(--space-xs);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.timeline-content-wrapper p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 440px;
+}
+
+.timeline-item.left .timeline-content-wrapper p {
+  margin-left: auto;
+}
+
+/* Scroll reveal animations for timeline */
+.about-page .reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(-40px) scale(0.95);
+  will-change: transform, opacity;
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+.about-page .reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.about-page .reveal-on-scroll.delay-1.revealed { transition-delay: 0.15s; }
+.about-page .reveal-on-scroll.delay-2.revealed { transition-delay: 0.3s; }
+.about-page .reveal-on-scroll.delay-3.revealed { transition-delay: 0.45s; }
+.about-page .reveal-on-scroll.delay-4.revealed { transition-delay: 0.6s; }
+.about-page .reveal-on-scroll.delay-5.revealed { transition-delay: 0.75s; }
+
+.about-page .reveal-on-scroll.revealed .timeline-dot {
+  animation: pulseDotTimeline 1.2s forwards ease-in-out;
+}
+
+@keyframes pulseDotTimeline {
+  0% { transform: scale(0.4); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+
+/* Mobile responsive timeline layout */
+@media (max-width: 768px) {
+  .timeline-line {
+    left: 20px;
+    transform: none;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    padding-left: var(--space-2xl);
+    padding-right: 0;
+    text-align: left !important;
+  }
+  
+  .timeline-item.left .timeline-header-row {
+    flex-direction: row;
+  }
+  
+  .timeline-item .timeline-content-wrapper p {
+    margin-left: 0 !important;
+    text-align: left !important;
+  }
+  
+  .timeline-item .timeline-dot {
+    left: 14px !important;
+  }
+}
+

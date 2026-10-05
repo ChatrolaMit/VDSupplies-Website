@@ -1,6 +1,17 @@
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, ShoppingCart, User } from 'lucide-react';
-import { useState, useContext } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import {
+  Menu,
+  X,
+  ShoppingCart,
+  User as UserIcon,
+  Package,
+  LogOut,
+  ChevronDown,
+  FileText,
+  ShieldCheck,
+  ArrowRight
+} from 'lucide-react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
 import logoImg from '../../assets/logo.png';
@@ -8,78 +19,228 @@ import './Header.css';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { cartCount } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Close dropdown on click outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Close menus on Esc key
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setDropdownOpen(false);
+        setMobileOpen(false);
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleLogout = () => {
+    setDropdownOpen(false);
+    setMobileOpen(false);
+    logout();
+    navigate('/');
+  };
+
+  // Get user initial for avatar badge
+  const userInitial = user?.name ? user.name.charAt(0).toUpperCase() : (user?.email ? user.email.charAt(0).toUpperCase() : 'U');
+  const userDisplayName = user?.name || user?.email?.split('@')[0] || 'Account';
 
   return (
     <header className="header">
-      <div className="header__inner container">
-        <Link to="/" className="header__logo">
+      {/* Top subtle glow line */}
+      <div className="header__glow-bar" />
+
+      <div className="header__inner">
+        {/* Brand Logo */}
+        <Link to="/" className="header__logo" aria-label="Victoria Diagnostic Supplies Home">
           <img src={logoImg} alt="Victoria Diagnostic Supplies" className="header__logo-img" />
-          <span className="header__logo-text">Victoria Diagnostic Supplies</span>
+          <div className="header__brand-text">
+            <span className="header__brand-title">VICTORIA DIAGNOSTIC</span>
+            <span className="header__brand-subtitle">SUPPLIES · AUSTRALIA</span>
+          </div>
         </Link>
 
+        {/* Primary Navigation */}
         <nav className={`header__nav ${mobileOpen ? 'header__nav--open' : ''}`}>
-          <NavLink to="/" className="header__link" onClick={() => setMobileOpen(false)}>
+          <NavLink
+            to="/"
+            className={({ isActive }) => `header__link ${isActive ? 'header__link--active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
             Home
           </NavLink>
-          <NavLink to="/products" className="header__link" onClick={() => setMobileOpen(false)}>
+          <NavLink
+            to="/products"
+            className={({ isActive }) => `header__link ${isActive ? 'header__link--active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
             Products
           </NavLink>
-          <NavLink to="/about" className="header__link" onClick={() => setMobileOpen(false)}>
+          <NavLink
+            to="/about"
+            className={({ isActive }) => `header__link ${isActive ? 'header__link--active' : ''}`}
+            onClick={() => setMobileOpen(false)}
+          >
             About Us
           </NavLink>
-          <NavLink to="/request-quote" className="header__link header__link--cta" onClick={() => setMobileOpen(false)}>
-            Request Quote
-          </NavLink>
+
+          {/* Mobile-only CTA */}
+          <div className="header__mobile-cta">
+            {!user && (
+              <Link
+                to="/login"
+                className="header__btn-signin-mobile"
+                onClick={() => setMobileOpen(false)}
+              >
+                <UserIcon size={18} />
+                <span>Sign In to Account</span>
+              </Link>
+            )}
+            <Link
+              to="/request-quote"
+              className="header__btn-quote"
+              onClick={() => setMobileOpen(false)}
+            >
+              <span>Request Quote</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </nav>
 
-        <div className="header__actions" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        {/* Action Controls: Cart, Account, Quote CTA */}
+        <div className="header__actions">
+          {/* Cart Pill with Live Counter Badge */}
+          <Link
+            to="/cart"
+            className={`header__action-pill header__cart-pill ${cartCount > 0 ? 'header__cart-pill--active' : ''}`}
+            aria-label={`View cart with ${cartCount} items`}
+            onClick={() => setMobileOpen(false)}
+          >
+            <div className="header__cart-icon-wrapper">
+              <ShoppingCart size={19} className="header__action-icon" />
+              {cartCount > 0 && (
+                <span className="header__cart-counter" aria-live="polite">
+                  {cartCount}
+                </span>
+              )}
+            </div>
+            <span className="header__action-text">Cart</span>
+          </Link>
+
+          {/* User Account / Profile Dropdown */}
           {user ? (
-            <div className="header__user-menu" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative' }}>
-              <Link to="/orders" className="header__link" style={{ fontSize: '0.9rem', color: 'var(--color-text-light)' }} onClick={() => setMobileOpen(false)}>
-                Orders
-              </Link>
-              <button 
-                onClick={() => { logout(); setMobileOpen(false); }} 
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.9rem', color: 'var(--color-text-light)', fontFamily: 'inherit' }}>
-                Logout
+            <div className="header__user-wrapper" ref={dropdownRef}>
+              <button
+                type="button"
+                className={`header__user-btn ${dropdownOpen ? 'header__user-btn--open' : ''}`}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                aria-expanded={dropdownOpen}
+                aria-haspopup="true"
+              >
+                <div className="header__avatar">
+                  {userInitial}
+                </div>
+                <span className="header__user-name">{userDisplayName}</span>
+                <ChevronDown size={15} className={`header__chevron ${dropdownOpen ? 'header__chevron--rotated' : ''}`} />
               </button>
+
+              {/* Glassmorphic Dropdown Menu */}
+              {dropdownOpen && (
+                <div className="header__dropdown" role="menu">
+                  <div className="header__dropdown-header">
+                    <span className="header__dropdown-greeting">Signed in as</span>
+                    <strong className="header__dropdown-name">{user.name || 'Healthcare Practitioner'}</strong>
+                    <span className="header__dropdown-email">{user.email}</span>
+                  </div>
+
+                  <div className="header__dropdown-divider" />
+
+                  <Link
+                    to="/orders"
+                    className="header__dropdown-item"
+                    role="menuitem"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <Package size={17} className="header__dropdown-icon" />
+                    <span>My Order History</span>
+                  </Link>
+
+                  <Link
+                    to="/request-quote"
+                    className="header__dropdown-item"
+                    role="menuitem"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <FileText size={17} className="header__dropdown-icon" />
+                    <span>Request Custom Quote</span>
+                  </Link>
+
+                  <Link
+                    to="/products"
+                    className="header__dropdown-item"
+                    role="menuitem"
+                    onClick={() => setDropdownOpen(false)}
+                  >
+                    <ShieldCheck size={17} className="header__dropdown-icon" />
+                    <span>Browse Catalog</span>
+                  </Link>
+
+                  <div className="header__dropdown-divider" />
+
+                  <button
+                    type="button"
+                    className="header__dropdown-item header__dropdown-item--logout"
+                    role="menuitem"
+                    onClick={handleLogout}
+                  >
+                    <LogOut size={17} className="header__dropdown-icon header__dropdown-icon--logout" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
-            <Link to="/login" className="header__link" style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.95rem' }} onClick={() => setMobileOpen(false)}>
-              <User size={18} /> Sign In
+            <Link
+              to="/login"
+              className="header__action-pill header__signin-pill"
+              onClick={() => setMobileOpen(false)}
+            >
+              <UserIcon size={18} className="header__action-icon" />
+              <span className="header__action-text">Sign In</span>
             </Link>
           )}
 
-          <Link to="/cart" className="header__cart-icon" aria-label="View cart" style={{ position: 'relative', color: 'var(--color-text)', display: 'flex', alignItems: 'center' }}>
-            <ShoppingCart size={22} />
-            {cartCount > 0 && (
-              <span style={{
-                position: 'absolute',
-                top: '-8px',
-                right: '-8px',
-                backgroundColor: 'var(--cyan)',
-                color: 'white',
-                fontSize: '11px',
-                fontWeight: 'bold',
-                height: '18px',
-                width: '18px',
-                borderRadius: '50%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                {cartCount}
-              </span>
-            )}
+          {/* Primary B2B Request Quote Button */}
+          <Link
+            to="/request-quote"
+            className="header__btn-quote header__btn-quote--desktop"
+          >
+            <span>Request Quote</span>
+            <ArrowRight size={15} />
           </Link>
+
+          {/* Mobile Menu Toggle Button */}
           <button
-            className="header__icon-btn header__menu-btn"
-            aria-label="Toggle menu"
+            type="button"
+            className="header__mobile-toggle"
+            aria-label="Toggle navigation menu"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>

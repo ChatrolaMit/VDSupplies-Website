@@ -1,10 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Catalog from './pages/Catalog/Catalog';
 import AboutUs from './pages/AboutUs/AboutUs';
-import BeyondTheShelf from './pages/BeyondTheShelf/BeyondTheShelf';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import RequestQuote from './pages/RequestQuote/RequestQuote';
 import Success from './pages/Success/Success';
@@ -34,7 +33,7 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/orders" element={<OrderHistory />} />
         {/* <Route path="/categories" element={<Categories />} /> */}
-        <Route path="/beyond-the-shelf" element={<BeyondTheShelf />} />
+        <Route path="/beyond-the-shelf" element={<Navigate to="/about" replace />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/request-quote" element={<RequestQuote />} />

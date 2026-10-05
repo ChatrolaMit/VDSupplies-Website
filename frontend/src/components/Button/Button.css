@@ -21,21 +21,21 @@
 
 /* Sizes */
 .btn--sm {
-  height: 36px;
+  height: 38px;
   padding: 0 var(--space-base);
-  font-size: 13px;
+  font-size: 14.5px;
 }
 
 .btn--md {
-  height: 44px;
+  height: 46px;
   padding: 0 var(--space-lg);
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .btn--lg {
-  height: 52px;
+  height: 54px;
   padding: 0 var(--space-xl);
-  font-size: 16px;
+  font-size: 17.5px;
 }
 
 /* Primary */

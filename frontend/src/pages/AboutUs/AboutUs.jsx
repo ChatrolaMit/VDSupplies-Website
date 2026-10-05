@@ -15,6 +15,10 @@ import {
   Activity,
   Award,
   Users,
+  Warehouse,
+  Cpu,
+  Layers,
+  Brain,
 } from 'lucide-react';
 import Button from '../../components/Button/Button';
 import './AboutUs.css';
@@ -30,6 +34,33 @@ export default function AboutUs() {
         "VD Supplies supplies medical consumables and radiology equipment to Australian healthcare providers, backed by manufacturer relationships for anything non-standard."
       );
     }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const elements = entry.target.querySelectorAll('.reveal-on-scroll');
+          elements.forEach((el) => el.classList.add('revealed'));
+        } else {
+          const elements = entry.target.querySelectorAll('.reveal-on-scroll');
+          elements.forEach((el) => el.classList.remove('revealed'));
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.05,
+      rootMargin: "0px 0px -60px 0px"
+    });
+
+    const container = document.querySelector('.timeline-container');
+    if (container) {
+      observer.observe(container);
+    }
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
   }, []);
 
   return (
@@ -191,6 +222,104 @@ export default function AboutUs() {
                 <p className="capability-card__text">
                   Once sourced or built, we manage the logistics so it lands where you need it, priced clearly.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Brand Pillars Section (Timeline Layout) ── */}
+        <section className="about-page__pillars-section">
+          <div className="container">
+            <div className="about-page__section-header text-center">
+              <span className="section-badge">Operational Principles</span>
+              <h2 className="about-page__section-title">Brand pillars</h2>
+              <p className="about-page__section-subtitle">
+                How we operate differently from traditional sales organizations and static catalogue brokers.
+              </p>
+            </div>
+
+            <div className="timeline-container">
+              {/* Central vertical line */}
+              <div className="timeline-line"></div>
+
+              {/* Pillar 1 */}
+              <div className="timeline-item left reveal-on-scroll delay-1">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Warehouse size={24} />
+                    </div>
+                  </div>
+                  <h3>We're a supplier first</h3>
+                  <p>
+                    Real stock, real products, real delivery in Melbourne and Sydney — that's the foundation of clinical trust, not a broker's afterthought.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 2 */}
+              <div className="timeline-item right reveal-on-scroll delay-2">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Cpu size={24} />
+                    </div>
+                  </div>
+                  <h3>Solve, don't just sell</h3>
+                  <p>
+                    A non-standard clinical requirement is a starting point, not a dead end. We engineer the path forward.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="timeline-item left reveal-on-scroll delay-3">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Layers size={24} />
+                    </div>
+                  </div>
+                  <h3>Fewer layers, real value</h3>
+                  <p>
+                    Where we can connect a facility directly to a verified manufacturer, we do — eliminating unnecessary distributor markups.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 4 */}
+              <div className="timeline-item right reveal-on-scroll delay-4">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Brain size={24} />
+                    </div>
+                  </div>
+                  <h3>Category intelligence</h3>
+                  <p>
+                    We understand radiology consumables, injector specifications, and clinical workflows well enough to consult, not just take orders.
+                  </p>
+                </div>
+              </div>
+
+              {/* Pillar 5 */}
+              <div className="timeline-item left reveal-on-scroll delay-5">
+                <div className="timeline-dot"></div>
+                <div className="timeline-content-wrapper">
+                  <div className="timeline-header-row">
+                    <div className="timeline-icon-circle">
+                      <Heart size={24} />
+                    </div>
+                  </div>
+                  <h3>Built for the long term</h3>
+                  <p>
+                    A clinical partnership compounds in value as we understand a facility's exact recurring needs and usage rhythms.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
