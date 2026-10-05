@@ -8,7 +8,7 @@ import './Categories.css';
 
 export default function Categories() {
   useEffect(() => {
-    document.title = "Product Categories | VD Supplies";
+    document.title = "Product Categories | VDS — Victoria Diagnostic Supplies";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(

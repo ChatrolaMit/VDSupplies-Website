@@ -23,7 +23,7 @@ const products = [
     certifications: ['CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/exam_bed_sheet_10.png',
+    image: '/images/exam_bed_sheet_10.webp',
     featured: true,
   },
   {
@@ -45,7 +45,7 @@ const products = [
       { label: 'Upholstery', value: 'Heavy-duty PVC vinyl', detail: 'Fire, stain, mildew, oil, water, and wear-resistant' },
     ],
     certifications: ['ISO 13485', 'CE Mark'],
-    image: '/images/exam_couch.png',
+    image: '/images/exam_couch.webp',
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
     featured: true,
@@ -70,7 +70,7 @@ const products = [
     certifications: ['CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/patient_examination_gown.png',
+    image: '/images/patient_examination_gown.webp',
   },
   {
     id: 'thermasonic-gel-warmer',
@@ -93,7 +93,7 @@ const products = [
     certifications: ['UL Listed', 'CSA Listed', 'CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/thermasonic_gel_warmer.png',
+    image: '/images/thermasonic_gel_warmer.webp',
     featured: true,
   },
   {
@@ -115,7 +115,7 @@ const products = [
     certifications: ['ISO 13485', 'CE Mark'],
     stockStatus: 'Limited Stock',
     bulkOrderAvailable: true,
-    image: '/images/medical_warming_cabinet.png',
+    image: '/images/medical_warming_cabinet.webp',
   },
   {
     id: 'mri-safe-wheelchair',
@@ -137,7 +137,7 @@ const products = [
     certifications: ['EN12183', 'ISO 7176'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/non_metal_wheelchair.png',
+    image: '/images/non_metal_wheelchair.webp',
     featured: true,
   },
   {
@@ -160,7 +160,7 @@ const products = [
     certifications: ['CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/sony_upp_110hg_print_media.png',
+    image: '/images/sony_upp_110hg_print_media.webp',
   },
   {
     id: 'tisora-facial-tissue',
@@ -181,7 +181,7 @@ const products = [
     certifications: ['FSC Certified'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/tisora_facial_tissue.png',
+    image: '/images/tisora_facial_tissue.webp',
   },
   {
     id: 'tisora-toilet-tissue',
@@ -201,7 +201,7 @@ const products = [
     certifications: ['FSC Certified'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/tisora_toilet_tissue_paper.png',
+    image: '/images/tisora_toilet_tissue_paper.webp',
   },
   {
     id: 'ultra-med-roll',
@@ -223,7 +223,7 @@ const products = [
     certifications: ['CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/ultra_medical_roll.png',
+    image: '/images/ultra_medical_roll.webp',
     featured: true,
   },
   {
@@ -246,7 +246,7 @@ const products = [
     certifications: ['ISO 13485'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/ultrasound_gel_5L.png',
+    image: '/images/ultrasound_gel_5L.webp',
     featured: true,
   },
   {
@@ -269,7 +269,7 @@ const products = [
     certifications: ['ISO 13485'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/ultrasound_gel_250ML.png',
+    image: '/images/ultrasound_gel_250ML.webp',
   },
   {
     id: 'uv-probe-disinfector',
@@ -291,7 +291,7 @@ const products = [
     certifications: ['ISO 13485', 'CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/ultrasound_probe_disinfector.png',
+    image: '/images/ultrasound_probe_disinfector.webp',
     featured: true,
   },
   {
@@ -314,7 +314,7 @@ const products = [
     certifications: ['CE Mark'],
     stockStatus: 'In Stock',
     bulkOrderAvailable: true,
-    image: '/images/x_ray_protective_apron.png',
+    image: '/images/x_ray_protective_apron.webp',
     featured: true,
   }
 ];

@@ -40,16 +40,16 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (product) {
-      document.title = `${product.name} | VD Supplies`;
+      document.title = `${product.name} | VDS — Victoria Diagnostic Supplies`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) {
         meta.setAttribute(
           'content',
-          `${product.tagline || ''} Available through VD Supplies Australia. ${product.artgNumber || ''}`
+          `${product.tagline || ''} Available through VDS (Victoria Diagnostic Supplies) Australia. ${product.artgNumber || ''}`
         );
       }
     } else if (!loading) {
-      document.title = "Product Not Found | VD Supplies";
+      document.title = "Product Not Found | VDS — Victoria Diagnostic Supplies";
     }
   }, [product, loading]);
 
@@ -97,7 +97,12 @@ export default function ProductDetail() {
         <section className="container pd__hero">
           <div className="pd__hero-image">
             {product.image && product.image !== '/images/placeholder.jpg' ? (
-              <img src={product.image} alt={product.name} className="pd__hero-img" />
+              <img 
+                src={product.image.replace(/\.(png|jpe?g)$/i, '.webp')} 
+                alt={product.name} 
+                className="pd__hero-img" 
+                decoding="async" 
+              />
             ) : (
               <div className="pd__hero-image-placeholder">
                 <ShieldCheck size={72} />

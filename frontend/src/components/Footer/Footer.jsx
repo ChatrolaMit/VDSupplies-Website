@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logo.webp';
 import './Footer.css';
 
 const LinkedinIcon = (props) => (
@@ -132,7 +132,7 @@ export default function Footer() {
 
       <div className="footer__bottom">
         <div className="container footer__bottom-inner">
-          <p>© 2026 VD Supplies Pty Ltd. All rights reserved. Clinical Precision & Sovereign Supply chains.</p>
+          <p>© 2026 Victoria Diagnostic Supplies Pty Ltd (VDS). All rights reserved. Clinical Precision & Sovereign Supply chains.</p>
           <div className="footer__bottom-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>

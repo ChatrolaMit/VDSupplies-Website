@@ -41,7 +41,12 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
           <div className="qvm-top-row">
             <div className="qvm-image-container">
               {product.image && product.image !== '/images/placeholder.jpg' ? (
-                <img src={product.image} alt={product.name} />
+                <img 
+                  src={product.image.replace(/\.(png|jpe?g)$/i, '.webp')} 
+                  alt={product.name} 
+                  loading="lazy" 
+                  decoding="async" 
+                />
               ) : (
                 <ShieldCheck size={48} />
               )}

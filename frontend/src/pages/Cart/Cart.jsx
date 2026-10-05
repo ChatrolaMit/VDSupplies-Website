@@ -69,7 +69,11 @@ export default function Cart() {
             {cartItems.map((item) => (
               <div key={item.product.id} className="cart-item">
                 <div className="cart-item-image">
-                  <img src={item.product.image} alt={item.product.name} />
+                  <img 
+                    src={item.product.image?.replace(/\.(png|jpe?g)$/i, '.webp')} 
+                    alt={item.product.name} 
+                    loading="lazy" 
+                  />
                 </div>
                 <div className="cart-item-details">
                   <Link to={`/product/${item.product.id}`} className="cart-item-name">

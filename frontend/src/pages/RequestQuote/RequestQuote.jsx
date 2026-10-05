@@ -33,12 +33,12 @@ export default function RequestQuote() {
   });
 
   useEffect(() => {
-    document.title = "Request a Quote | VD Supplies";
+    document.title = "Request a Quote | VDS — Victoria Diagnostic Supplies";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
         'content',
-        'Request a B2B quote for clinical radiology consumables and equipment from VD Supplies.'
+        'Request a B2B quote for clinical radiology consumables and equipment from VDS (Victoria Diagnostic Supplies).'
       );
     }
   }, []);

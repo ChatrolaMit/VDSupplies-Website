@@ -14,8 +14,10 @@ import {
 import { useState, useContext, useEffect, useRef } from 'react';
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logo.webp';
 import './Header.css';
+
+const TICKER_TEXT = "More Than Medical Supplies. Complete Healthcare Solutions.";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,8 +63,27 @@ export default function Header() {
 
   return (
     <header className="header">
-      {/* Top subtle glow line */}
-      <div className="header__glow-bar" />
+      {/* Top Continuous Rotating Announcement Ticker Bar */}
+      <div className="header__ticker" role="region" aria-label="Announcement">
+        <div className="header__ticker-track">
+          <div className="header__ticker-group">
+            {[...Array(6)].map((_, i) => (
+              <span key={`t1-${i}`} className="header__ticker-item">
+                <span className="header__ticker-star">✦</span>
+                <span>{TICKER_TEXT}</span>
+              </span>
+            ))}
+          </div>
+          <div className="header__ticker-group" aria-hidden="true">
+            {[...Array(6)].map((_, i) => (
+              <span key={`t2-${i}`} className="header__ticker-item">
+                <span className="header__ticker-star">✦</span>
+                <span>{TICKER_TEXT}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div className="header__inner">
         {/* Brand Logo */}

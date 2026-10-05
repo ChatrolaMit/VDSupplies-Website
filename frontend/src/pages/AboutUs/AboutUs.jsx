@@ -19,19 +19,21 @@ import {
   Cpu,
   Layers,
   Brain,
+  Scan,
+  HeartPulse,
 } from 'lucide-react';
 import Button from '../../components/Button/Button';
 import './AboutUs.css';
-import aboutUsImg from '../../assets/aboutus.jpeg';
+import aboutUsImg from '../../assets/aboutus.webp';
 
 export default function AboutUs() {
   useEffect(() => {
-    document.title = "About VD Supplies | Medical & Radiology Equipment Supplier";
+    document.title = "About VDS | Victoria Diagnostic Supplies";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
         'content',
-        "VD Supplies supplies medical consumables and radiology equipment to Australian healthcare providers, backed by manufacturer relationships for anything non-standard."
+        "Victoria Diagnostic Supplies (VDS) supplies medical consumables and radiology equipment to Australian healthcare providers, backed by manufacturer relationships for anything non-standard."
       );
     }
 
@@ -73,7 +75,7 @@ export default function AboutUs() {
               <span className="about-page__badge">About Us</span>
               <h1 className="about-page__hero-title">A different starting question</h1>
               <p className="about-page__hero-subtitle">
-                VD Supplies supplies medical consumables and radiology equipment to Australian clinics, hospitals and imaging departments. 
+                Victoria Diagnostic Supplies (VDS) supplies medical consumables and radiology equipment to Australian clinics, hospitals and imaging departments. 
                 That's the core of the business — real product, held and delivered reliably.
               </p>
               <p className="about-page__hero-secondary">
@@ -121,7 +123,7 @@ export default function AboutUs() {
                   <div className="network-card__visual">
                     <img 
                       src={aboutUsImg} 
-                      alt="VD Supplies Team and Facility" 
+                      alt="Victoria Diagnostic Supplies (VDS) Team and Facility" 
                       className="network-card__image"
                     />
                   </div>
@@ -325,48 +327,80 @@ export default function AboutUs() {
           </div>
         </section>
 
-        {/* Who We Work With Section */}
+        {/* Who We Supply (Client Ecosystem) Section */}
         <section className="about-page__facilities">
           <div className="container">
-            <div className="facilities-box">
-              <div className="facilities-box__content">
-                <span className="section-badge">Client Ecosystem</span>
-                <h2 className="about-page__section-title">Who we work with</h2>
-                <p className="facilities-box__desc">
-                  Radiology and imaging clinics, hospitals, day surgeries, aged care providers, general practices, 
-                  dental and veterinary practices — any healthcare buyer whose need doesn't fit neatly into 
-                  someone else's standard catalogue.
-                </p>
+            <div className="facilities-header text-center">
+              <span className="section-badge">Client Ecosystem</span>
+              <h2 className="about-page__section-title">Who we supply</h2>
+              <p className="facilities-header__headline">
+                Built around how your practice runs.
+              </p>
+            </div>
+
+            <div className="facilities-cards-wrapper">
+              {/* Imaging centres */}
+              <div className="facility-card">
+                <div className="facility-card__icon-wrap">
+                  <Scan size={24} />
+                </div>
+                <div className="facility-card__body">
+                  <h3 className="facility-card__title">Imaging centres</h3>
+                  <p className="facility-card__desc">
+                    High-volume consumables on standing orders, so the list runs on time.
+                  </p>
+                </div>
               </div>
 
-              <div className="facilities-box__grid">
-                <div className="facility-item">
-                  <div className="facility-icon"><Activity size={20} /></div>
-                  <div className="facility-name">Radiology &amp; Imaging Clinics</div>
+              {/* Hospital departments */}
+              <div className="facility-card">
+                <div className="facility-card__icon-wrap">
+                  <Hospital size={24} />
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><Hospital size={20} /></div>
-                  <div className="facility-name">Hospitals (Public &amp; Private)</div>
+                <div className="facility-card__body">
+                  <h3 className="facility-card__title">Hospital departments</h3>
+                  <p className="facility-card__desc">
+                    Supplier documents ready for your procurement team, and a contact who knows your account.
+                  </p>
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><Stethoscope size={20} /></div>
-                  <div className="facility-name">Day Surgeries</div>
+              </div>
+
+              {/* GP clinics */}
+              <div className="facility-card">
+                <div className="facility-card__icon-wrap">
+                  <Stethoscope size={24} />
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><Heart size={20} /></div>
-                  <div className="facility-name">Aged Care Providers</div>
+                <div className="facility-card__body">
+                  <h3 className="facility-card__title">GP clinics</h3>
+                  <p className="facility-card__desc">
+                    The imaging and exam essentials, without minimum orders built for hospitals.
+                  </p>
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><Users size={20} /></div>
-                  <div className="facility-name">General Practices</div>
+              </div>
+
+              {/* Allied health */}
+              <div className="facility-card">
+                <div className="facility-card__icon-wrap">
+                  <HeartPulse size={24} />
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><Award size={20} /></div>
-                  <div className="facility-name">Dental Practices</div>
+                <div className="facility-card__body">
+                  <h3 className="facility-card__title">Allied health</h3>
+                  <p className="facility-card__desc">
+                    Ultrasound and treatment-room supplies for physio, sports medicine and sonography.
+                  </p>
                 </div>
-                <div className="facility-item">
-                  <div className="facility-icon"><ShieldCheck size={20} /></div>
-                  <div className="facility-name">Veterinary Practices</div>
+              </div>
+
+              {/* Aged care */}
+              <div className="facility-card">
+                <div className="facility-card__icon-wrap">
+                  <Heart size={24} />
+                </div>
+                <div className="facility-card__body">
+                  <h3 className="facility-card__title">Aged care</h3>
+                  <p className="facility-card__desc">
+                    Linen, gowns and warming equipment from a team that has worked in aged care.
+                  </p>
                 </div>
               </div>
             </div>

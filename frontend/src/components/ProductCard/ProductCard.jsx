@@ -25,7 +25,13 @@ export default function ProductCard({
     <div className={`product-card ${compact ? 'product-card--compact' : ''}`}>
       <Link to={`/product/${product.id}`} className="product-card__image" style={{ textDecoration: 'none' }}>
         {product.image && product.image !== '/images/placeholder.jpg' ? (
-          <img src={product.image} alt={product.name} className="product-card__img" />
+          <img 
+            src={product.image.replace(/\.(png|jpe?g)$/i, '.webp')} 
+            alt={product.name} 
+            className="product-card__img" 
+            loading="lazy" 
+            decoding="async" 
+          />
         ) : (
           <div className="product-card__image-placeholder">
             <ShieldCheck size={compact ? 28 : 40} />

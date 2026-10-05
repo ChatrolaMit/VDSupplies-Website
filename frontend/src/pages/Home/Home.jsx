@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import { fetchFeaturedProducts } from '../../data/products';
 import './Home.css';
-import disinfectorImg from '../../assets/disinfector.png';
+import disinfectorImg from '../../assets/disinfector.webp';
 
 export default function Home() {
   const [featured, setFeatured] = useState([]);
@@ -15,7 +15,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.title = "VD Supplies | Medical Consumables & Radiology Equipment, Australia";
+    document.title = "VDS | Victoria Diagnostic Supplies — Medical Consumables & Radiology Equipment, Australia";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
@@ -41,7 +41,7 @@ export default function Home() {
                 Your Direct Partner in Medical Supplies
               </h1>
               <p className="home__hero-subtitle">
-                Certified medical consumables and equipment, ready for same-day dispatch from Australian warehouses. Whether you need standard products, custom solutions, or hard-to-source items, we build supply chains that work around your business—not the other way around.
+                Certified medical consumables and equipment, ready for same-day dispatch from Australian warehouses. Whether you need standard products, custom solutions, or hard-to-source items, we build supply chains that work around your business, not the other way around.
 
               </p>
               <div className="home__hero-actions">
@@ -113,12 +113,12 @@ export default function Home() {
 
 
 
-        {/* ── Why Facilities Switch ── */}
+        {/* ── Why Practices Switch ── */}
         <section id="customer-value" className="home__section switching-section">
           <div className="container">
             <div className="home__section-header text-center">
               <span className="section-badge">Customer Value</span>
-              <h2 className="home__section-title">Why facilities are switching</h2>
+              <h2 className="home__section-title">Why practices switch to VDS</h2>
               <p className="home__section-subtitle">
                 Clinical managers deserve straightforward logistics without hidden distributor brokerage fees.
               </p>
@@ -134,8 +134,10 @@ export default function Home() {
                   <div className="process-step-badge step-1">
                     <span>01</span>
                   </div>
-                  <h4>We're a real supplier, not a broker</h4>
-                  <p>Stock, product knowledge and delivery come first.</p>
+                  <h4>Direct</h4>
+                  <p>
+                    We import straight from the manufacturer. Fewer hands between the factory and your room means a better price and a clearer trail.
+                  </p>
                 </div>
 
                 {/* Step 2 */}
@@ -143,8 +145,10 @@ export default function Home() {
                   <div className="process-step-badge step-2">
                     <span>02</span>
                   </div>
-                  <h4>We rarely say "we don't have that"</h4>
-                  <p>Manufacturer relationships mean there's usually a path, even for an unusual request.</p>
+                  <h4>Compliant</h4>
+                  <p>
+                    We're the Australian sponsor on the ARTG, not a reseller of someone else's listing. Ask us for the paperwork and you get it same day.
+                  </p>
                 </div>
 
                 {/* Step 3 */}
@@ -152,8 +156,10 @@ export default function Home() {
                   <div className="process-step-badge step-3">
                     <span>03</span>
                   </div>
-                  <h4>You get access, not just inventory</h4>
-                  <p>A fixed catalogue can't flex to your actual need. Our network can.</p>
+                  <h4>Clinical</h4>
+                  <p>
+                    VDS was founded by a nurse who has stocked wards and run clinical teams. We choose products the way you'd use them.
+                  </p>
                 </div>
 
                 {/* Step 4 */}
@@ -161,17 +167,10 @@ export default function Home() {
                   <div className="process-step-badge step-4">
                     <span>04</span>
                   </div>
-                  <h4>You get a straight answer on cost</h4>
-                  <p>We explain where savings come from — a removed layer, not just a lower quote.</p>
-                </div>
-
-                {/* Step 5 */}
-                <div className="process-flow-card">
-                  <div className="process-step-badge step-5">
-                    <span>05</span>
-                  </div>
-                  <h4>You get a partner who asks first</h4>
-                  <p>"What do you need?" comes before "here's what we've got."</p>
+                  <h4>Responsive</h4>
+                  <p>
+                    Instant Quotes. Urgent stock after hours in Metro Melbourne and nearby suburbs.
+                  </p>
                 </div>
               </div>
             </div>

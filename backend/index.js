@@ -263,10 +263,21 @@ app.post('/api/auth/google', async (req, res) => {
   }
 });
 
+// In-memory cache for ultra-fast products serving
+let productsCache = null;
+let productsCacheTime = 0;
+const PRODUCTS_CACHE_TTL = 3 * 60 * 1000; // 3 minutes
+
 // Routes
 app.get('/api/products', async (req, res) => {
   try {
+    const now = Date.now();
+    if (productsCache && (now - productsCacheTime < PRODUCTS_CACHE_TTL)) {
+      return res.json(productsCache);
+    }
     const products = await Product.find({});
+    productsCache = products;
+    productsCacheTime = now;
     res.json(products);
   } catch (err) {
     res.status(500).json({ error: err.message });

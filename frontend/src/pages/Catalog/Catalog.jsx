@@ -13,12 +13,12 @@ export default function Catalog() {
   const activeCat = searchParams.get('cat') || 'all';
 
   useEffect(() => {
-    document.title = "Radiology Supplies | VD Supplies Australia";
+    document.title = "Radiology Supplies | VDS — Victoria Diagnostic Supplies";
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
         'content',
-        'Contrast, injector, positioning, protection and ultrasound consumables and equipment, supplied directly by VD Supplies.'
+        'Contrast, injector, positioning, protection and ultrasound consumables and equipment, supplied directly by VDS (Victoria Diagnostic Supplies).'
       );
     }
   }, []);
@@ -53,10 +53,6 @@ export default function Catalog() {
     return result;
   }, [products, activeCat, searchQuery]);
 
-  if (loading) {
-    return <main className="catalog"><div className="container" style={{padding: '100px 0', textAlign: 'center'}}>Loading products...</div></main>;
-  }
-
   return (
     <>
       <main className="catalog">
@@ -90,17 +86,29 @@ export default function Catalog() {
             {/* Results Count bar */}
             <div className="catalog__results-bar">
               <span className="catalog__count">
-                Showing <strong>{filtered.length}</strong> clinical consumables & equipment
+                {loading ? 'Loading catalog items...' : (
+                  <>Showing <strong>{filtered.length}</strong> clinical consumables & equipment</>
+                )}
               </span>
             </div>
 
             <div className="catalog__grid">
-              {filtered.map((product) => (
-                <ProductCard key={product.id} product={product} showBadge={false} />
-              ))}
+              {loading ? (
+                [...Array(6)].map((_, i) => (
+                  <div 
+                    key={`skel-${i}`} 
+                    className="product-card" 
+                    style={{ minHeight: '380px', opacity: 0.15, background: 'var(--card)' }} 
+                  />
+                ))
+              ) : (
+                filtered.map((product) => (
+                  <ProductCard key={product.id} product={product} showBadge={false} />
+                ))
+              )}
             </div>
 
-            {filtered.length === 0 && (
+            {!loading && filtered.length === 0 && (
               <div className="catalog__empty">
                 <p>No medical supplies match the active search criteria.</p>
               </div>

@@ -86,10 +86,10 @@
 }
 
 .about-page__hero-secondary {
-  font-size: 16.5px;
-  line-height: 1.65;
-  color: var(--ink-soft);
-  margin-bottom: var(--space-xl);
+  font-size: 18.5px;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: var(--space-md);
   max-width: 860px;
 }
 
@@ -318,7 +318,7 @@
 }
 
 .identity-card__main-text {
-  font-size: 20px;
+  font-size: 18.5px;
   line-height: 1.7;
   color: var(--ink);
   max-width: 900px;
@@ -428,90 +428,138 @@
   color: var(--ink-soft);
 }
 
-/* ── Facilities (Who we work with) Section ── */
+/* ── Facilities (Who We Supply / Client Ecosystem) Section ── */
 .about-page__facilities {
   padding: var(--space-3xl) 0;
   background: var(--card);
   border-bottom: 1px solid var(--line);
 }
 
-.facilities-box {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: var(--space-3xl);
-  align-items: center;
+.facilities-header {
+  max-width: 780px;
+  margin: 0 auto var(--space-3xl);
+  text-align: center;
 }
 
-@media (max-width: 900px) {
-  .facilities-box {
-    grid-template-columns: 1fr;
-    gap: var(--space-2xl);
-  }
+.facilities-header .section-badge {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-sm);
+  border: 1px solid rgba(14, 77, 164, 0.2);
+  background: rgba(14, 77, 164, 0.05);
+  padding: 5px 14px;
+  border-radius: var(--radius-full);
 }
 
-.facilities-box__content h2 {
-  font-size: 34px;
+.facilities-header .about-page__section-title {
+  font-size: clamp(32px, 4.2vw, 44px);
   font-weight: 800;
   color: var(--ink);
-  margin-top: var(--space-xs);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.02em;
 }
 
-.facilities-box__desc {
-  font-size: 16px;
+.facilities-header__headline {
+  font-size: 19.5px;
   line-height: 1.6;
-  color: var(--ink-soft);
+  color: var(--cyan);
+  font-weight: 500;
+  margin: 0 auto;
 }
 
-.facilities-box__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-md);
-}
-
-@media (max-width: 500px) {
-  .facilities-box__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.facility-item {
+.facilities-cards-wrapper {
   display: flex;
-  align-items: center;
-  gap: var(--space-base);
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.facility-card {
+  flex: 0 1 calc(33.333% - 20px);
+  min-width: 320px;
+  max-width: 380px;
   background: var(--paper);
   border: 1px solid var(--line);
-  padding: var(--space-base);
-  border-radius: var(--radius-lg);
-  transition: border-color var(--transition-fast), background var(--transition-fast);
+  border-radius: 20px;
+  padding: 28px 24px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.facility-item:hover {
-  border-color: var(--cyan);
-  background: rgba(23, 179, 191, 0.04);
+.facility-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(143, 179, 223, 0.35);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(14, 77, 164, 0.04);
 }
 
-.facility-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(14, 77, 164, 0.08);
+.facility-card__icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(14, 77, 164, 0.12);
+  border: 1px solid rgba(143, 179, 223, 0.2);
   color: var(--blue);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 }
 
-.facility-item:hover .facility-icon {
-  background: var(--blue);
-  color: #FFFFFF;
+.facility-card:hover .facility-card__icon-wrap {
+  background: var(--blue-deep);
+  color: #ffffff;
+  border-color: var(--cyan);
+  transform: scale(1.05);
 }
 
-.facility-name {
-  font-size: 16px;
-  font-weight: 600;
+.facility-card__body {
+  flex: 1;
+}
+
+.facility-card__title {
+  font-family: var(--font-family-headings);
+  font-size: 19px;
+  font-weight: 700;
   color: var(--ink);
+  margin-bottom: 8px;
+  line-height: 1.3;
+  transition: color 0.25s ease;
+}
+
+.facility-card:hover .facility-card__title {
+  color: var(--cyan);
+}
+
+.facility-card__desc {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .facility-card {
+    flex: 0 1 calc(50% - 16px);
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .facility-card {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+  .facilities-header__headline {
+    font-size: 17.5px;
+  }
 }
 
 /* ── Mission & Vision ── */
@@ -658,7 +706,7 @@
 .about-page__section-subtitle {
   color: var(--ink-soft);
   max-width: 660px;
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: auto;
   line-height: 1.6;
   font-size: 17.5px;
